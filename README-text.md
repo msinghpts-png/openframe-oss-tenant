@@ -1,306 +1,293 @@
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="docs/assets/logo-light.png">
-    <img alt="OpenFrame OSS Tenant" src="docs/assets/logo-light.png" width="400">
-  </picture>
-</p>
+# 🦩 OpenFrame OSS Tenant
 
-<p align="center">
-  <b>🌟 Open-Source Multi-Tenant Platform for Modern Applications</b>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://github.com/yourusername/openframe-oss-tenant/actions"><img src="https://img.shields.io/github/actions/workflow/status/yourusername/openframe-oss-tenant/ci.yml?branch=main&style=for-the-badge&logo=github&logoColor=white&color=F357BB" alt="Build Status"></a>
-  <a href="https://github.com/yourusername/openframe-oss-tenant/releases"><img src="https://img.shields.io/github/v/release/yourusername/openframe-oss-tenant?style=for-the-badge&logo=semantic-release&logoColor=white&color=5EFAF0" alt="Version"></a>
-  <a href="https://github.com/yourusername/openframe-oss-tenant/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yourusername/openframe-oss-tenant?style=for-the-badge&color=F357BB" alt="License"></a>
-  <a href="https://discord.gg/your-discord"><img src="https://img.shields.io/discord/your-discord-id?style=for-the-badge&logo=discord&logoColor=white&color=5EFAF0" alt="Discord"></a>
-  <a href="https://github.com/yourusername/openframe-oss-tenant/stargazers"><img src="https://img.shields.io/github/stars/yourusername/openframe-oss-tenant?style=for-the-badge&logo=star&logoColor=white&color=F357BB" alt="Stars"></a>
-</p>
+![Flamingo Logo](docs/assets/flamingo-logo-dark.svg#gh-dark-mode-only)
+![Flamingo Logo](docs/assets/flamingo-logo-light.svg#gh-light-mode-only)
 
-<p align="center">
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-documentation">Documentation</a> •
-  <a href="#-demo">Demo</a> •
-  <a href="#-community">Community</a> •
-  <a href="#-contributing">Contributing</a>
-</p>
+**The enterprise-grade unified platform for data, APIs, automation, and AI**
 
----
+[![License](https://img.shields.io/badge/License-Apache%202.0-F357BB?style=for-the-badge&logo=apache&logoColor=white)](LICENSE)
+[![Docs](https://img.shields.io/badge/Docs-5EFAF0?style=for-the-badge&logo=gitbook&logoColor=1A1A1A)](https://www.flamingo.run/knowledge-base)
+[![GitHub Stars](https://img.shields.io/github/stars/flamingo-stack/openframe-oss-tenant?style=for-the-badge&logo=github&color=F357BB)](https://github.com/flamingo-stack/openframe-oss-tenant/stargazers)
+[![Docker](https://img.shields.io/badge/Docker-Available-5EFAF0?style=for-the-badge&logo=docker&logoColor=1A1A1A)](https://hub.docker.com/r/flamingo/openframe)
+[![Community](https://img.shields.io/badge/Community-LinkedIn-F357BB?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/showcase/openframemsp)
+
+[🚀 Quick Start](#-quick-start) • [📖 Documentation](https://www.flamingo.run/knowledge-base) • [🌐 Website](https://www.flamingo.run/) • [💬 Community](https://www.linkedin.com/showcase/openframemsp)
+
+</div>
 
 ## ✨ Highlights
 
-OpenFrame OSS Tenant is a powerful, production-ready multi-tenant platform that enables organizations to rapidly deploy scalable applications with enterprise-grade security and isolation.
+OpenFrame creates a **unified layer** for data, APIs, automation, and AI on top of carefully selected open-source projects, simplifying IT and security operations through a single, cohesive platform.
 
-🚀 **Rapid Deployment** - Get your multi-tenant application running in minutes, not months  
-🔒 **Enterprise Security** - Built-in tenant isolation, RBAC, and compliance-ready features  
-⚡ **High Performance** - Optimized for scale with intelligent resource management  
-🛠️ **Developer Friendly** - Comprehensive APIs, SDKs, and extensive documentation  
-🌍 **Cloud Native** - Kubernetes-first design with Docker support  
-📊 **Real-time Analytics** - Built-in monitoring, metrics, and tenant insights  
+- **🎯 Unified Dashboard** → Single interface for managing all services and workflows
+- **🤖 Smart Automation** → Automated deployment and monitoring capabilities  
+- **🧠 AI-Powered Insights** → Real-time anomaly detection and AI assistants
+- **🔐 Enterprise Security** → Integrated security controls across all services
+- **⚡ High Performance** → Handles 100,000 events/second with sub-500ms latency
+- **📈 Scalable Architecture** → Built on proven microservices principles
 
 ## 🏗️ Architecture
 
+OpenFrame uses a modern microservices architecture designed for enterprise-scale operations:
+
 ```mermaid
-graph TB
-    subgraph "Client Applications"
-        WEB[Web Dashboard]
-        MOBILE[Mobile Apps]
-        API_CLIENT[API Clients]
+flowchart TB
+    Client[🌐 Client Apps] --> LB[⚖️ Load Balancer]
+    LB --> Gateway[🚪 API Gateway]
+    
+    subgraph "🔐 Gateway Layer"
+        Gateway --> GraphQL[📊 GraphQL Engine]
+        Gateway --> Auth[🔑 Auth Service]
     end
     
-    subgraph "OpenFrame Platform"
-        GATEWAY[API Gateway]
-        AUTH[Authentication Service]
-        TENANT[Tenant Manager]
-        CORE[Core Services]
+    subgraph "⚙️ Processing Layer"
+        Stream[🌊 Stream Processing] --> Kafka[📨 Apache Kafka]
+        Kafka --> |📈 Analytics| PT[📊 Apache Pinot]
+        Kafka --> |💾 Storage| CS[🗃️ Cassandra]
     end
     
-    subgraph "Data Layer"
-        PRIMARY[(Primary Database)]
-        TENANT_DB[(Tenant Databases)]
-        CACHE[(Redis Cache)]
-        STORAGE[(Object Storage)]
+    subgraph "💽 Data Layer"
+        GraphQL --> MongoDB[🍃 MongoDB]
+        GraphQL --> CS
+        GraphQL --> PT
+        GraphQL --> Redis[🔴 Redis Cache]
     end
     
-    subgraph "Infrastructure"
-        K8S[Kubernetes Cluster]
-        MONITOR[Monitoring Stack]
-        LOGGING[Centralized Logging]
-    end
-    
-    WEB --> GATEWAY
-    MOBILE --> GATEWAY
-    API_CLIENT --> GATEWAY
-    
-    GATEWAY --> AUTH
-    GATEWAY --> TENANT
-    GATEWAY --> CORE
-    
-    AUTH --> PRIMARY
-    TENANT --> TENANT_DB
-    CORE --> PRIMARY
-    CORE --> CACHE
-    CORE --> STORAGE
-    
-    TENANT --> K8S
-    CORE --> MONITOR
-    GATEWAY --> LOGGING
+    style Gateway fill:#F357BB,stroke:#1A1A1A,color:#FFFFFF
+    style Stream fill:#5EFAF0,stroke:#1A1A1A,color:#1A1A1A
+    style MongoDB fill:#1A1A1A,stroke:#F357BB,color:#FFFFFF
 ```
 
 ## 🚀 Quick Start
 
 Get OpenFrame running locally in under 5 minutes:
 
+### One-Line Installation
+
 ```bash
-curl -fsSL https://get.openframe.dev/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/flamingo-stack/openframe-oss-tenant/main/scripts/install.sh | bash
 ```
 
-Or clone and run manually:
+### Platform-Specific Scripts
+
+<details>
+<summary><b>🪟 Windows</b></summary>
+
+```powershell
+# Interactive mode
+.\scripts\run-windows.ps1
+
+# Silent mode
+.\scripts\run-windows.ps1 -Silent
+
+# Show help
+.\scripts\run-windows.ps1 -Help
+```
+
+Features automatic tool installation (kind, kubectl, helm, skaffold, jq, telepresence) and Docker Desktop integration.
+
+</details>
+
+<details>
+<summary><b>🍎 macOS</b></summary>
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/openframe-oss-tenant.git
+# Interactive mode
+./scripts/run-mac.sh
+
+# Silent mode  
+./scripts/run-mac.sh --silent
+
+# Show help
+./scripts/run-mac.sh --help
+```
+
+</details>
+
+<details>
+<summary><b>🐧 Linux</b></summary>
+
+```bash
+# Interactive mode
+./scripts/run-linux.sh
+
+# Silent mode
+./scripts/run-linux.sh --silent
+
+# Show help  
+./scripts/run-linux.sh --help
+```
+
+</details>
+
+### 🔑 GitHub Token Setup
+
+Create a GitHub Personal Access Token (Classic) with these permissions:
+- `repo` - Full control of private repositories
+- `read:packages` - Read access to packages  
+- `write:packages` - Write access to packages
+
+**Create Token:** [GitHub Settings → Developer Settings → Personal Access Tokens](https://github.com/settings/tokens)
+
+### 🌐 Access Your Instance
+
+Once started, OpenFrame will be available at:
+
+- **🎛️ UI Dashboard:** [http://localhost:8080](http://localhost:8080)
+- **🔗 GraphQL API:** [http://localhost:8080/graphql](http://localhost:8080/graphql)  
+- **⚙️ Config Server:** [http://localhost:8888](http://localhost:8888)
+
+## ☸️ Deployment
+
+### Docker Compose (Recommended for Development)
+
+```bash
+# Clone and start
+git clone https://github.com/flamingo-stack/openframe-oss-tenant.git
 cd openframe-oss-tenant
-
-# Start with Docker Compose
 docker-compose up -d
-
-# Or run locally
-npm install
-npm run dev
 ```
 
-🎉 **That's it!** Your OpenFrame instance is now running at `http://localhost:3000`
-
-**Default credentials:**
-- Email: `admin@openframe.dev`
-- Password: `admin123` (⚠️ Change this immediately in production)
-
-## ☸️ Deployment Options
-
-### Docker (Recommended for Development)
+### Kubernetes (Production)
 
 ```bash
-docker run -d \
-  --name openframe \
-  -p 3000:3000 \
-  -e DATABASE_URL=postgresql://user:pass@db:5432/openframe \
-  openframe/oss-tenant:latest
+# Install via Helm
+helm repo add flamingo https://charts.flamingo.run
+helm install openframe flamingo/openframe --namespace openframe --create-namespace
+
+# Or apply manifests directly
+kubectl apply -f k8s/
 ```
 
-### Kubernetes (Production Ready)
+### Cloud Providers
 
-```yaml
-# Quick deploy to k8s
-kubectl apply -f https://raw.githubusercontent.com/yourusername/openframe-oss-tenant/main/deploy/k8s/
-```
-
-### Helm Chart
-
-```bash
-helm repo add openframe https://charts.openframe.dev
-helm install my-openframe openframe/oss-tenant
-```
-
-## 🛠️ Integrations
-
-| Integration | Status | Description |
-|-------------|--------|-------------|
-| **PostgreSQL** | ✅ Primary | Default database with full tenant isolation |
-| **MySQL** | ✅ Supported | Alternative database option |
-| **Redis** | ✅ Primary | Session storage and caching |
-| **Docker** | ✅ Primary | Container deployment |
-| **Kubernetes** | ✅ Primary | Orchestration and scaling |
-| **Auth0** | ✅ Supported | Enterprise authentication |
-| **Okta** | ✅ Supported | SSO integration |
-| **Stripe** | ✅ Supported | Subscription billing |
-| **AWS S3** | ✅ Supported | File storage |
-| **Cloudflare** | ✅ Supported | CDN and security |
+| Provider | Status | Documentation |
+|----------|---------|---------------|
+| ☁️ **AWS EKS** | ✅ Supported | [AWS Guide](docs/deployment/aws.md) |
+| ☁️ **Google GKE** | ✅ Supported | [GCP Guide](docs/deployment/gcp.md) |
+| ☁️ **Azure AKS** | ✅ Supported | [Azure Guide](docs/deployment/azure.md) |
+| ☁️ **DigitalOcean** | 🔄 Beta | [DO Guide](docs/deployment/digitalocean.md) |
 
 ## 🖼️ Screenshots
 
-<details>
-<summary>📱 <strong>Dashboard Overview</strong></summary>
+<div align="center">
 
+### Dashboard Overview
 ![Dashboard](docs/assets/screenshots/dashboard.png)
-*Modern tenant management dashboard with real-time analytics*
 
-</details>
+### Real-time Monitoring  
+![Monitoring](docs/assets/screenshots/monitoring.png)
 
-<details>
-<summary>🏢 <strong>Tenant Management</strong></summary>
+### Service Management
+![Services](docs/assets/screenshots/services.png)
 
-![Tenant Management](docs/assets/screenshots/tenant-management.png)
-*Comprehensive tenant creation and management interface*
+</div>
 
-</details>
+## 🛠️ Integrations
 
-<details>
-<summary>📊 <strong>Analytics & Monitoring</strong></summary>
+OpenFrame seamlessly integrates with your existing tools and infrastructure:
 
-![Analytics](docs/assets/screenshots/analytics.png)
-*Real-time monitoring and usage analytics per tenant*
+### Data & Analytics
+- **🍃 MongoDB** - Application data storage
+- **🗃️ Cassandra** - Event storage and time-series data
+- **📊 Apache Pinot** - Real-time analytics engine
+- **🔴 Redis** - Caching and rate limiting
 
-</details>
+### Stream Processing  
+- **📨 Apache Kafka** - Event streaming platform
+- **🌊 Custom Stream Service** - Data processing and enrichment
+- **🚨 Anomaly Detection** - AI-powered insights
+
+### DevOps & Infrastructure
+- **☸️ Kubernetes** - Container orchestration
+- **🕸️ Istio** - Service mesh
+- **📊 Prometheus + Grafana** - Monitoring stack
+- **📝 Loki** - Log aggregation
 
 ## 🗺️ Roadmap
 
-- [x] ~~Multi-tenant architecture~~
-- [x] ~~Docker containerization~~
-- [x] ~~Kubernetes deployment~~
-- [x] ~~REST API v1~~
-- [ ] 🔄 GraphQL API (In Progress)
-- [ ] 📱 Mobile SDKs (iOS/Android)
-- [ ] 🌐 Multi-region deployment
-- [ ] 🔒 Advanced RBAC system
-- [ ] 📈 Enhanced analytics dashboard
-- [ ] 🤖 AI-powered tenant insights
-- [ ] 🔌 Plugin system
-- [ ] 📚 White-label solutions
-
-> Want to contribute to the roadmap? [Join our discussions](https://github.com/yourusername/openframe-oss-tenant/discussions) or [propose new features](https://github.com/yourusername/openframe-oss-tenant/issues/new?template=feature_request.md).
+- [x] ✅ Core platform and microservices architecture
+- [x] ✅ GraphQL API and authentication system  
+- [x] ✅ Real-time stream processing with Kafka
+- [x] ✅ Vue.js dashboard with responsive design
+- [ ] 🔄 Advanced AI/ML pipeline integrations
+- [ ] 🔄 Multi-cloud deployment automation
+- [ ] 🔄 Enhanced security scanning and compliance
+- [ ] 📋 Extended third-party tool integrations
+- [ ] 📋 Advanced analytics and reporting features
+- [ ] 📋 Mobile application support
 
 ## 🤝 Contributing
 
-We love your input! We want to make contributing as easy and transparent as possible. Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+We welcome contributions from the community! Here's how you can help:
 
 ### Development Setup
 
 ```bash
-# 1. Fork and clone the repo
-git clone https://github.com/your-username/openframe-oss-tenant.git
+# Prerequisites
+java --version  # OpenJDK 21+
+node --version  # Node.js 18+
+rustc --version # Rust 1.70+
+docker --version # Docker 24.0+
 
-# 2. Install dependencies
-npm install
+# Build all services
+mvn clean install
 
-# 3. Set up environment
-cp .env.example .env.local
-# Edit .env.local with your configuration
+# Run tests
+mvn test
 
-# 4. Start development server
-npm run dev
-
-# 5. Run tests
-npm test
+# Start development
+./scripts/run-local.sh
 ```
 
-### Code of Conduct
+### Ways to Contribute
 
-This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you're expected to honor this code.
+- 🐛 **Report Bugs** - [Open an Issue](https://github.com/flamingo-stack/openframe-oss-tenant/issues/new?template=bug_report.md)
+- 💡 **Request Features** - [Feature Request](https://github.com/flamingo-stack/openframe-oss-tenant/issues/new?template=feature_request.md)
+- 📝 **Improve Docs** - Help us make documentation better
+- 🔧 **Submit PRs** - Check our [Contributing Guide](CONTRIBUTING.md)
 
-## 💬 Community & Support
+## 🔒 Security
 
-- 💬 **Discord**: [Join our community](https://discord.gg/your-discord)
-- 📚 **Documentation**: [docs.openframe.dev](https://docs.openframe.dev)
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/openframe-oss-tenant/issues)
-- 💡 **Feature Requests**: [GitHub Discussions](https://github.com/yourusername/openframe-oss-tenant/discussions)
-- 📧 **Email**: support@openframe.dev
+OpenFrame is built with enterprise security in mind:
 
-## 📋 FAQ
+- **🔐 OAuth 2.0 + JWT** authentication
+- **🔒 AES-256** encryption for sensitive data
+- **📋 Comprehensive audit** logging
+- **🏢 Multi-tenant** isolation
+- **⚡ Rate limiting** and circuit breakers
+- **🛡️ Security scanning** in CI/CD
 
-<details>
-<summary><strong>Is OpenFrame suitable for production use?</strong></summary>
+**Found a security issue?** Please email security@flamingo.run instead of opening a public issue.
 
-Yes! OpenFrame is production-ready and used by companies worldwide. We recommend following our [Production Deployment Guide](docs/production-deployment.md) for best practices.
+## 📄 License
 
-</details>
-
-<details>
-<summary><strong>How does tenant isolation work?</strong></summary>
-
-OpenFrame provides multiple isolation levels:
-- **Database isolation**: Separate databases per tenant
-- **Schema isolation**: Shared database with separate schemas  
-- **Row-level security**: Shared tables with RLS policies
-
-</details>
-
-<details>
-<summary><strong>Can I self-host OpenFrame?</strong></summary>
-
-Absolutely! OpenFrame is designed to be self-hosted. Check our [Self-Hosting Guide](docs/self-hosting.md) to get started.
-
-</details>
-
-<details>
-<summary><strong>What's the difference between this and SaaS solutions?</strong></summary>
-
-OpenFrame gives you complete control over your data, infrastructure, and customizations without vendor lock-in. Plus, it's free and open-source!
-
-</details>
-
-## 🔒 Security & License
-
-### Security Policy
-
-Found a security vulnerability? Please read our [Security Policy](SECURITY.md) and report it responsibly.
-
-### License
-
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [Apache License 2.0](LICENSE.md).
 
 ```
-Copyright (c) 2025 OpenFrame Contributors
+Copyright 2025 Flamingo Technologies
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files...
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 ```
 
 ---
 
-<p align="center">
-  <strong>Built with 💖 by the Flamingo team in Miami Beach, FL</strong><br>
-  <sub>Star ⭐ this repo if you find it useful!</sub>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="https://openframe.dev">🌐 Website</a> •
-  <a href="https://docs.openframe.dev">📚 Docs</a> •
-  <a href="https://twitter.com/openframedev">🐦 Twitter</a> •
-  <a href="https://linkedin.com/company/openframe">💼 LinkedIn</a>
-</p>
+**Built with ❤️ by the [🦩 Flamingo](https://www.flamingo.run/) team**
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Powered%20by-🦩%20Flamingo-F357BB?style=for-the-badge" alt="Powered by Flamingo">
-</p>
+[🌐 Website](https://www.flamingo.run/) • [📖 Documentation](https://www.flamingo.run/knowledge-base) • [💼 LinkedIn](https://www.linkedin.com/showcase/openframemsp) • [📧 Contact](mailto:hello@flamingo.run)
+
+</div>

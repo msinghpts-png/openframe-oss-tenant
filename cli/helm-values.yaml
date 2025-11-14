@@ -1,0 +1,28 @@
+global:
+  domain: openframe.techm.world
+  storageClass: standard
+  environment: production
+
+apiGateway:
+  replicas: 2
+  resources:
+    requests:
+      cpu: 500m
+      memory: 512Mi
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+
+cassandra:
+  enabled: true
+  replicas: 3
+  storage:
+    size: 100Gi
+    storageClass: standard
+
+redis:
+  enabled: true
+  replicas: 3
+  storage:
+    size: 50Gi
+    storageClass: standard

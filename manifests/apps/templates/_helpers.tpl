@@ -38,14 +38,15 @@ Rules:
 
 {{/* Extract deployment and ingress configuration */}}
 {{- $oss := $vals.deployment.oss.enabled | default false }}
-{{- $ossLocalhost := $vals.deployment.oss.ingress.localhost.enabled | default false }}
-{{- $ossNgrok := $vals.deployment.oss.ingress.ngrok.enabled | default false }}
+  {{- $ossCustom := $vals.deployment.oss.ingress.custom.enabled | default false }}
+  {{- $ossLocalhost := $vals.deployment.oss.ingress.localhost.enabled | default false }}
+  {{- $ossNgrok := $vals.deployment.oss.ingress.ngrok.enabled | default false }}
 {{- $saas := $vals.deployment.saas.enabled | default false }}
 {{- $saasLocalhost := $vals.deployment.saas.ingress.localhost.enabled | default false }}
 {{- $saasGcp := $vals.deployment.saas.ingress.gcp.enabled | default false }}
 
 {{/* Apply skipping logic */}}
-{{- if and $oss $ossLocalhost (eq $name "ngrok-operator") }}
+  {{- if and $oss (or $ossLocalhost $ossCustom) (eq $name "ngrok-operator") }}
   true
 {{- else if and $oss $ossNgrok (eq $name "ingress-nginx") }}
   true

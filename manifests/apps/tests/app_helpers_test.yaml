@@ -5,6 +5,7 @@ tests:
   - it: should transfer custom ngrok credentials via app-helper
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.credentials.apiKey: "custom-api-key"
@@ -54,6 +55,7 @@ tests:
   - it: should not add ngrok credentials when they are empty by default
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.saas.enabled: false

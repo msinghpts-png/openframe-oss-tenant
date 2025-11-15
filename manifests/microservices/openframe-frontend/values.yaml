@@ -2,6 +2,7 @@ environment: dev
 
 deployment:
   oss:
+    enabled: true
     ingress:
       custom:
         enabled: true

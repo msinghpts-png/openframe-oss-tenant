@@ -349,7 +349,7 @@ func (m *K3dManager) findAvailablePorts(count int) ([]int, error) {
 
 	// Start with default ports and increment if busy (matching script behavior)
 	defaultPorts := []int{6550, 80, 443} // API, HTTP, HTTPS
-	alternatePorts := []int{6551, 8080, 8443}
+    alternatePorts := []int{6551, 81, 444}
 
 	var ports []int
 

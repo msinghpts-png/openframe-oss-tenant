@@ -185,15 +185,15 @@ func TestNodeInfo(t *testing.T) {
 
 func TestProviderOptions(t *testing.T) {
 	t.Run("can create and use provider options", func(t *testing.T) {
-		options := models.ProviderOptions{
-			K3d: &models.K3dOptions{
-				PortMappings: []string{"8080:80@loadbalancer", "8443:443@loadbalancer"},
-			},
+                options := models.ProviderOptions{
+                        K3d: &models.K3dOptions{
+                                PortMappings: []string{"80:80@loadbalancer", "443:443@loadbalancer"},
+                        },
 			Verbose: true,
 		}
 
 		assert.NotNil(t, options.K3d)
-		assert.Equal(t, []string{"8080:80@loadbalancer", "8443:443@loadbalancer"}, options.K3d.PortMappings)
+                assert.Equal(t, []string{"80:80@loadbalancer", "443:443@loadbalancer"}, options.K3d.PortMappings)
 		assert.True(t, options.Verbose)
 	})
 }

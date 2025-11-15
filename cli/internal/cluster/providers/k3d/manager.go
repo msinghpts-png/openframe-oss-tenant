@@ -17,11 +17,11 @@ import (
 
 // Constants for configuration
 const (
-	defaultK3sImage    = "rancher/k3s:v1.31.5-k3s1"
-	defaultTimeout     = "300s"
-	defaultAPIPort     = "6550"
-	defaultHTTPPort    = "8080"
-	defaultHTTPSPort   = "8443"
+        defaultK3sImage    = "rancher/k3s:v1.31.5-k3s1"
+        defaultTimeout     = "300s"
+        defaultAPIPort     = "6550"
+        defaultHTTPPort    = "80"
+        defaultHTTPSPort   = "443"
 	dynamicPortStart   = 20000
 	dynamicPortEnd     = 50000
 	portSearchStep     = 1000

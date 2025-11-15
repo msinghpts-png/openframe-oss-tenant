@@ -174,14 +174,14 @@ func TestNodeInfo(t *testing.T) {
 func TestProviderOptions(t *testing.T) {
 	t.Run("creates provider options with K3d options", func(t *testing.T) {
 		options := ProviderOptions{
-			K3d: &K3dOptions{
-				PortMappings: []string{"8080:80@loadbalancer", "8443:443@loadbalancer"},
+                        K3d: &K3dOptions{
+                                PortMappings: []string{"80:80@loadbalancer", "443:443@loadbalancer"},
 			},
 			Verbose: true,
 		}
 		
 		assert.NotNil(t, options.K3d)
-		assert.Equal(t, []string{"8080:80@loadbalancer", "8443:443@loadbalancer"}, options.K3d.PortMappings)
+                assert.Equal(t, []string{"80:80@loadbalancer", "443:443@loadbalancer"}, options.K3d.PortMappings)
 		assert.True(t, options.Verbose)
 		assert.Nil(t, options.GKE)
 	})
@@ -214,16 +214,16 @@ func TestProviderOptions(t *testing.T) {
 func TestK3dOptions(t *testing.T) {
 	t.Run("creates K3d options with port mappings", func(t *testing.T) {
 		options := K3dOptions{
-			PortMappings: []string{
-				"8080:80@loadbalancer",
-				"8443:443@loadbalancer",
+                        PortMappings: []string{
+                                "80:80@loadbalancer",
+                                "443:443@loadbalancer",
 				"6550:6443@server:0",
 			},
 		}
 		
 		assert.Len(t, options.PortMappings, 3)
-		assert.Contains(t, options.PortMappings, "8080:80@loadbalancer")
-		assert.Contains(t, options.PortMappings, "8443:443@loadbalancer")
+                assert.Contains(t, options.PortMappings, "80:80@loadbalancer")
+                assert.Contains(t, options.PortMappings, "443:443@loadbalancer")
 		assert.Contains(t, options.PortMappings, "6550:6443@server:0")
 	})
 	
@@ -288,7 +288,7 @@ func TestJSONSerialization(t *testing.T) {
 	t.Run("provider options serialization", func(t *testing.T) {
 		options := ProviderOptions{
 			K3d: &K3dOptions{
-				PortMappings: []string{"8080:80@loadbalancer"},
+                        PortMappings: []string{"80:80@loadbalancer"},
 			},
 			Verbose: true,
 		}

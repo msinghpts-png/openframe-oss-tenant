@@ -5,6 +5,7 @@ tests:
   - it: should generate valid ArgoCD applications
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -36,6 +37,7 @@ tests:
   - it: should set correct sync waves
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -62,6 +64,7 @@ tests:
   - it: should include required spec fields for ArgoCD
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:

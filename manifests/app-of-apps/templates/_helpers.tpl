@@ -20,15 +20,17 @@ Validate ingress configuration for the enabled deployment type
 {{- $saas := .Values.deployment.saas.enabled | default false -}}
 
 {{- if $oss -}}
-{{/* Self-hosted: exactly one ingress (localhost OR ngrok) must be enabled */}}
-{{- $localhost := .Values.deployment.oss.ingress.localhost.enabled | default false -}}
-{{- $ngrok := .Values.deployment.oss.ingress.ngrok.enabled | default false -}}
-{{- $ingressCount := 0 -}}
-{{- if $localhost }}{{ $ingressCount = add $ingressCount 1 }}{{ end -}}
-{{- if $ngrok }}{{ $ingressCount = add $ingressCount 1 }}{{ end -}}
-{{- if ne $ingressCount 1 -}}
-{{- fail (printf "ERROR: Exactly one ingress must be enabled for oss deployment. Currently localhost=%t, ngrok=%t" $localhost $ngrok) -}}
-{{- end -}}
+  {{/* Self-hosted: exactly one ingress (custom, localhost, OR ngrok) must be enabled */}}
+  {{- $custom := .Values.deployment.oss.ingress.custom.enabled | default false -}}
+  {{- $localhost := .Values.deployment.oss.ingress.localhost.enabled | default false -}}
+  {{- $ngrok := .Values.deployment.oss.ingress.ngrok.enabled | default false -}}
+  {{- $ingressCount := 0 -}}
+  {{- if $custom }}{{ $ingressCount = add $ingressCount 1 }}{{ end -}}
+  {{- if $localhost }}{{ $ingressCount = add $ingressCount 1 }}{{ end -}}
+  {{- if $ngrok }}{{ $ingressCount = add $ingressCount 1 }}{{ end -}}
+  {{- if ne $ingressCount 1 -}}
+    {{- fail (printf "ERROR: Exactly one ingress must be enabled for oss deployment. Currently custom=%t, localhost=%t, ngrok=%t" $custom $localhost $ngrok) -}}
+  {{- end -}}
 
 {{- else if $saas -}}
 {{/* SaaS: exactly one ingress (localhost OR gcp) must be enabled */}}

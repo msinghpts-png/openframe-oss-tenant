@@ -6,6 +6,7 @@ tests:
   - it: should render localhost ingress for oss
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -41,10 +42,37 @@ tests:
           path: spec.rules[0].host
           value: localhost
 
+  # Custom ingress rendering
+  - it: should render custom ingress for oss
+    set:
+      deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: true
+      deployment.oss.ingress.custom.host: custom.example.com
+      deployment.oss.ingress.custom.tlsSecretName: custom-secret
+      deployment.oss.ingress.localhost.enabled: false
+      deployment.oss.ingress.ngrok.enabled: false
+      deployment.saas.enabled: false
+    asserts:
+      - hasDocuments:
+          count: 1
+      - equal:
+          path: spec.ingressClassName
+          value: nginx
+      - equal:
+          path: spec.rules[0].host
+          value: "custom.example.com"
+      - equal:
+          path: spec.tls[0].hosts[0]
+          value: "custom.example.com"
+      - equal:
+          path: spec.tls[0].secretName
+          value: custom-secret
+
   # Ngrok ingress rendering
   - it: should render ngrok ingress for oss
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"
@@ -66,6 +94,7 @@ tests:
   - it: should include TLS section for localhost
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -76,6 +105,7 @@ tests:
   - it: should not include TLS for ngrok
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"
@@ -88,6 +118,7 @@ tests:
   - it: should not render when deployment enabled but no ingress
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false

@@ -6,6 +6,7 @@ tests:
   - it: should render service correctly
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -21,6 +22,7 @@ tests:
   - it: should configure service correctly
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -44,6 +46,7 @@ tests:
   - it: should render service for oss ngrok
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"

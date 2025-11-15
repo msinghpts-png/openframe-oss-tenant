@@ -30,9 +30,10 @@ ingress-nginx:
         effect: "NoSchedule"
 
     publishService:
-      enabled: false
+      enabled: true
     extraArgs:
-      publish-status-address: localhost
+      publish-status-address: openframe.techm.world
+      use-forwarded-headers: "true"
       
     metrics:
       enabled: true

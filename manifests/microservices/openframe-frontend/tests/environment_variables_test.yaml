@@ -6,6 +6,7 @@ tests:
   - it: should set ngrok URLs for oss ngrok deployment
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"
@@ -31,6 +32,7 @@ tests:
   - it: should set localhost URLs for oss localhost deployment
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false
@@ -78,6 +80,7 @@ tests:
   - it: should have exactly 6 environment variables for localhost
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -90,6 +93,7 @@ tests:
   - it: should have exactly 6 environment variables for ngrok
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"
@@ -105,6 +109,7 @@ tests:
   - it: should handle different ngrok domains correctly
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "my-custom-domain.ngrok.app"

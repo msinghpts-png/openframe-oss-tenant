@@ -6,6 +6,7 @@ tests:
   - it: should include secretName for valid certificate
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.localhost.tls:
         cert: |
@@ -35,6 +36,7 @@ tests:
   - it: should not include secretName when no certificate provided
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
     asserts:
@@ -45,6 +47,7 @@ tests:
   - it: should not include secretName for invalid certificate
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.localhost.tls:
         cert: "invalid-cert-format"

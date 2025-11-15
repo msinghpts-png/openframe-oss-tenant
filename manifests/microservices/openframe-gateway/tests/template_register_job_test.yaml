@@ -6,6 +6,7 @@ tests:
   - it: should render register job when enabled
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
       registerJob.enabled: true
@@ -22,6 +23,7 @@ tests:
   - it: should not render register job when disabled
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
       registerJob.enabled: false
@@ -33,6 +35,7 @@ tests:
   - it: should configure job correctly
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
       registerJob.enabled: true
@@ -54,6 +57,7 @@ tests:
   - it: should include ArgoCD annotations
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.saas.enabled: false
       registerJob.enabled: true
@@ -69,6 +73,7 @@ tests:
   - it: should render job for oss ngrok
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: false
       deployment.oss.ingress.ngrok.enabled: true
       deployment.oss.ingress.ngrok.url: "test.ngrok.io"

@@ -9,6 +9,7 @@ tests:
   - it: should generate all required ArgoCD projects
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false
@@ -51,6 +52,7 @@ tests:
   - it: should have correct project metadata and permissions
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false
@@ -81,6 +83,7 @@ tests:
   - it: should have correct cluster resource whitelist
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false
@@ -135,6 +138,7 @@ tests:
   - it: should have correct project descriptions
     set:
       deployment.oss.enabled: true
+      deployment.oss.ingress.custom.enabled: false
       deployment.oss.ingress.localhost.enabled: true
       deployment.oss.ingress.ngrok.enabled: false
       deployment.saas.enabled: false

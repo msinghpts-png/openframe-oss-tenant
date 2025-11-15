@@ -2,11 +2,13 @@ environment: dev
 
 deployment:
   oss:
-    enabled: true    
-    # Ingress configuration - enable only ONE of the following
     ingress:
+      custom:
+        enabled: true
+        host: openframe.techm.world
+        tlsSecretName: openframe-techm-world-tls
       localhost:
-        enabled: true   # Enable localhost ingress with nginx
+        enabled: false
       ngrok:
         enabled: false  # Enable ngrok ingress for external access
         credentials:

@@ -48,8 +48,11 @@ ingress-nginx:
         https: 443
 
     service:
-      type: NodePort
+      type: LoadBalancer
       externalTrafficPolicy: Local
+      ports:
+        http: 80
+        https: 443
     
     serviceAccount:
       imagePullSecretsNames:
